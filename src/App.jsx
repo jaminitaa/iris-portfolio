@@ -8,7 +8,7 @@ import { LoadingScreen } from "./components/LoadingScreen";
 import { Menu } from "./components/Menu";
 import { ScrollManager } from "./components/ScrollManager";
 import { useSpring } from '@react-spring/core'
-import duckImage from './assets/duck.png'; // Import the duck image
+import favicon from '../public/favicon.ico';
 
 function App() {
   const [section, setSection] = useState(0);
@@ -19,14 +19,14 @@ function App() {
 
   useEffect(() => {
     setMenuOpened(false);
-    // Update favicon
+    // Set favicon
     const link = document.querySelector("link[rel~='icon']");
     if (!link) {
       const newLink = document.createElement('link');
       newLink.rel = 'icon';
       document.head.appendChild(newLink);
     }
-    link.href = duckImage;
+    link.href = favicon;
   }, []);
 
   useEffect(() => {
