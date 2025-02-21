@@ -316,11 +316,6 @@ const Scene = ({children, name, active, bg, setActive, activePortal, setActivePo
     }
   }, [active, name, activePortal, setActivePortal]);
 
-  const introText = {
-    Summer: "Welcome to my summer portal! Here, I showcase my creative side through playful and interactive designs. Just like this cheerful duck, I bring a fresh and energetic approach to web development, combining technical expertise with a touch of whimsy.",
-    Winter: "Step into my winter sanctuary! This cozy kitchen scene represents my love for crafting warm, inviting user experiences. Here, I blend functionality with aesthetics, creating digital spaces that feel both practical and welcoming."
-  }
-
   return (
     <group {...props}>
       <Text 
@@ -337,52 +332,6 @@ const Scene = ({children, name, active, bg, setActive, activePortal, setActivePo
           {children}
         </MeshPortalMaterial>
       </mesh>
-      {active === name && (
-        <>
-          <Html position={[0, -1.5, 0.1]}>
-            <div style={{
-              background: 'rgba(255, 255, 255, 0.5)',
-              padding: '1.5rem',
-              borderRadius: '10px',
-              width: '800px',
-              maxWidth: '90vw',
-              textAlign: 'left',
-              color: '#202020',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-              transform: 'translateX(-50%)',
-              position: 'relative'
-            }}>
-              <p style={{ 
-                fontSize: '1.1rem', 
-                lineHeight: '1.6',
-                margin: 0,
-                fontWeight: '500'
-              }}>
-                {introText[name]}
-              </p>
-            </div>
-          </Html>
-          <Html fullscreen>
-            <button 
-              onClick={() => setActive(null)}
-              style={{
-                background: 'rgba(255, 255, 255, 0.8)',
-                border: 'none',
-                borderRadius: '50%',
-                width: '40px',
-                height: '40px',
-                cursor: 'pointer',
-                fontSize: '24px',
-                color: '#202020',
-                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                zIndex: 1000
-              }}
-            >
-              ×
-            </button>
-          </Html>
-        </>
-      )}
     </group>
   )
 }

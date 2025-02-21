@@ -8,6 +8,7 @@ import { LoadingScreen } from "./components/LoadingScreen";
 import { Menu } from "./components/Menu";
 import { ScrollManager } from "./components/ScrollManager";
 import { useSpring } from '@react-spring/core'
+import duckImage from './assets/duck.png'; // Import the duck image
 
 function App() {
   const [section, setSection] = useState(0);
@@ -15,6 +16,18 @@ function App() {
   const [menuOpened, setMenuOpened] = useState(false);
   const [activePortal, setActivePortal] = useState(null);
   const [{ background, fill }, set] = useSpring({ background: '#f0f0f0', fill: '#202020' }, [])
+
+  useEffect(() => {
+    setMenuOpened(false);
+    // Update favicon
+    const link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      const newLink = document.createElement('link');
+      newLink.rel = 'icon';
+      document.head.appendChild(newLink);
+    }
+    link.href = duckImage;
+  }, []);
 
   useEffect(() => {
     setMenuOpened(false);
@@ -43,6 +56,7 @@ function App() {
                 <Interface 
                   setSection={setSection} 
                   activePortal={activePortal}
+                  setActive={setActivePortal}
                 />
               </Scroll>
             </ScrollControls>

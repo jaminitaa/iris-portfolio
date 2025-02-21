@@ -34,10 +34,10 @@ const Section = (props) => {
 };
 
 export const Interface = (props) => {
-  const { setSection, activePortal } = props;
+  const { setSection, activePortal, setActive } = props;
   return (
     <div className="flex flex-col items-center w-screen">
-      <AboutSection setSection={setSection} activePortal={activePortal} />
+      <AboutSection setSection={setSection} activePortal={activePortal} setActive={setActive} />
       <SkillsSection />
       {/* <ProjectsSection /> */}
     </div>
@@ -45,10 +45,31 @@ export const Interface = (props) => {
 };
 
 const AboutSection = (props) => {
-  const { setSection, activePortal } = props;
+  const { setSection, activePortal, setActive } = props;
+
+  const introText = {
+    Summer: "Welcome to my summer portal! Here, I showcase my creative side through playful and interactive designs. Just like this cheerful duck, I bring a fresh and energetic approach to web development, combining technical expertise with a touch of whimsy.",
+    Winter: "Step into my winter sanctuary! This cozy kitchen scene represents my love for crafting warm, inviting user experiences. Here, I blend functionality with aesthetics, creating digital spaces that feel both practical and welcoming."
+  }
+
+  const skills = {
+    Summer: [
+      { name: "React", level: 90 },
+      { name: "Three.js", level: 85 },
+      { name: "WebGL", level: 80 },
+      { name: "Creative Coding", level: 85 }
+    ],
+    Winter: [
+      { name: "UI/UX Design", level: 90 },
+      { name: "User Research", level: 85 },
+      { name: "Prototyping", level: 88 },
+      { name: "Design Systems", level: 85 }
+    ]
+  };
+
   return (
     <Section Col mobileTop whileInView={"visible"}>
-      {!activePortal && (
+      {!activePortal ? (
         <>
           <h1 className="text-4xl md:text-6xl font-extrabold ml-6 leading-snug mt-8 md:mt-0">
             Hi, I'm
@@ -61,6 +82,36 @@ const AboutSection = (props) => {
             Explore the different seasons of me by clicking the cards!
           </p>
         </>
+      ) : (
+        <div className="w-full max-w-2xl mx-auto px-4">
+          <div className="bg-white/50 rounded-lg p-6 shadow-lg relative">
+            <button 
+              onClick={() => setActive(null)}
+              className="absolute -top-4 -right-4 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-2xl shadow-lg hover:bg-white transition-colors"
+            >
+              ×
+            </button>
+            <p className="text-lg text-gray-800 mb-8">
+              {introText[activePortal]}
+            </p>
+            <div className="space-y-4">
+              {skills[activePortal].map((skill, index) => (
+                <div key={index} className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="font-medium text-gray-800">{skill.name}</span>
+                    <span className="text-gray-600">{skill.level}%</span>
+                  </div>
+                  <div className="h-2 bg-white/30 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-yellow-500 rounded-full transition-all duration-1000"
+                      style={{ width: `${skill.level}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       )}
     </Section>
   );
