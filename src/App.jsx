@@ -15,6 +15,7 @@ function App() {
   const [started, setStarted] = useState(false);
   const [menuOpened, setMenuOpened] = useState(false);
   const [activePortal, setActivePortal] = useState(null);
+  const [active, setActive] = useState(null);
   const [{ background, fill }, set] = useSpring({ background: '#f0f0f0', fill: '#202020' }, [])
 
   useEffect(() => {
@@ -49,6 +50,8 @@ function App() {
                     menuOpened={menuOpened} 
                     activePortal={activePortal}
                     setActivePortal={setActivePortal}
+                    active={active}
+                    setActive={setActive}
                   />
                 </Suspense>
               </Scroll>
@@ -56,7 +59,8 @@ function App() {
                 <Interface 
                   setSection={setSection} 
                   activePortal={activePortal}
-                  setActive={setActivePortal}
+                  setActive={setActive}
+                  setActivePortal={setActivePortal}
                 />
               </Scroll>
             </ScrollControls>

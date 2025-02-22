@@ -34,10 +34,15 @@ const Section = (props) => {
 };
 
 export const Interface = (props) => {
-  const { setSection, activePortal, setActive } = props;
+  const { setSection, activePortal, setActive, setActivePortal } = props;
   return (
     <div className="flex flex-col items-center w-screen">
-      <AboutSection setSection={setSection} activePortal={activePortal} setActive={setActive} />
+      <AboutSection 
+        setSection={setSection} 
+        activePortal={activePortal} 
+        setActive={setActive}
+        setActivePortal={setActivePortal}
+      />
       <SkillsSection />
       {/* <ProjectsSection /> */}
     </div>
@@ -45,7 +50,7 @@ export const Interface = (props) => {
 };
 
 const AboutSection = (props) => {
-  const { setSection, activePortal, setActive } = props;
+  const { setSection, activePortal, setActive, setActivePortal } = props;
 
   const introText = {
     Summer: "Welcome to my summer portal! Here, I showcase my creative side through playful and interactive designs. Just like this cheerful duck, I bring a fresh and energetic approach to web development, combining technical expertise with a touch of whimsy.",
@@ -67,6 +72,11 @@ const AboutSection = (props) => {
     ]
   };
 
+  const handleExit = () => {
+    setActivePortal(null);
+    setActive(null);
+  };
+
   return (
     <Section Col mobileTop whileInView={"visible"}>
       {!activePortal ? (
@@ -86,7 +96,7 @@ const AboutSection = (props) => {
         <div className="w-full max-w-2xl mx-auto px-4">
           <div className="bg-white/50 rounded-lg p-6 shadow-lg relative">
             <button 
-              onClick={() => setActive(null)}
+              onClick={handleExit}
               className="absolute -top-4 -right-4 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-2xl shadow-lg hover:bg-white transition-colors"
             >
               ×

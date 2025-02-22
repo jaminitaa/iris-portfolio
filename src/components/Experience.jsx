@@ -304,17 +304,25 @@ const Scene = ({children, name, active, bg, setActive, activePortal, setActivePo
   const portal = useRef()
 
   useFrame((_state, delta) => {
-    const worldOpen = active === name;
+    const worldOpen = activePortal === name;
     easing.damp(portal.current, 'blend', worldOpen ? 1 : 0, 0.2, delta)
   })
 
+  // Reset active state when portal is closed
   useEffect(() => {
-    if (active === name) {
-      setActivePortal(name);
-    } else if (activePortal === name) {
-      setActivePortal(null);
+    if (activePortal === null && active === name) {
+      setActive(null);
     }
-  }, [active, name, activePortal, setActivePortal]);
+  }, [activePortal, active, name, setActive]);
+
+  // Updated click handler to prevent closing on portal area click
+  const handleClick = (e) => {
+    e.stopPropagation();
+    if (!activePortal) {  // Only open if no portal is active
+      setActive(name);
+      setActivePortal(name);
+    }
+  };
 
   return (
     <group {...props}>
@@ -325,7 +333,7 @@ const Scene = ({children, name, active, bg, setActive, activePortal, setActivePo
       >
         {name}
       </Text>
-      <mesh name={name} onClick={() => setActive(active === name ? null : name)}>
+      <mesh name={name} onClick={handleClick}>
         <roundedPlaneGeometry args={[5, 2, 0.1]}/>
         <MeshPortalMaterial ref={portal}>
           <color attach="background" args={[bg]} />
