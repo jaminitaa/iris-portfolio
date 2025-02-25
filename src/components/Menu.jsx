@@ -5,7 +5,7 @@ export const Menu = (props) => {
     <>
       <button
         onClick={() => setMenuOpened(!menuOpened)}
-        className="z-20 fixed top-12 right-12 p-3 bg-yellow-500 w-11 h-11 rounded-md"
+        className="z-20 fixed top-10 right-10 p-3 bg-yellow-500 w-11 h-11 rounded-md font-mono"
       >
         <div
           className={`bg-white h-0.5 rounded-md w-full transition-all ${
@@ -24,12 +24,12 @@ export const Menu = (props) => {
         />
       </button>
       <div
-        className={`z-10 fixed top-0 right-0 bottom-0 bg-white transition-all overflow-hidden flex flex-col
+        className={`z-10 fixed top-0 right-0 bottom-0 bg-white transition-all overflow-hidden flex flex-col font-mono
         ${menuOpened ? "w-80" : "w-0"}`}
       >
         <div className="flex-1 flex items-start justify-center flex-col gap-6 p-8">
           <MenuButton label="About" onClick={() => onSectionChange(0)} />
-          <MenuButton label="Skills" onClick={() => onSectionChange(1)} />
+          <MenuButton label="Projects" onClick={() => onSectionChange(1)} />
         </div>
       </div>
     </>

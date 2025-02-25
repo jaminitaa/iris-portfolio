@@ -209,23 +209,23 @@ export const Experience = (props) => {
 
         <Scene 
           position-y={1.1}
-          name={"Summer"}
+          name={"SUMMER"}
           active={active}
           setActive={setActive}
           activePortal={activePortal}
           setActivePortal={setActivePortal}
         >
-          <Duck position={[0, -0.2, 1.5]} rotation={[0.18, 0, 0]}/>
+          <Duck position={[0, -0.3, 1.5]} rotation={[0.19, 0, 0]}/>
         </Scene>
         <Scene
           position-y={-1.2}
-          name={"Winter"}
+          name={"WINTER"}
           active={active}
           setActive={setActive}
           activePortal={activePortal}
           setActivePortal={setActivePortal}
         >
-          <Kitchen scale={1.3} position={[0, -1, -3]} rotation={[0,-1,0]}/>
+          <Kitchen scale={1.3} position={[-1.2, -1, -3]} rotation={[0,-1,0]}/>
         </Scene>
         </mesh>
         
@@ -327,7 +327,7 @@ const Scene = ({children, name, active, bg, setActive, activePortal, setActivePo
   return (
     <group {...props}>
       <Text 
-        fontSize={0.4}
+        fontSize={0.45}
         position={[0, -0.2, 0.051]}
         anchorY={"bottom"}
       >

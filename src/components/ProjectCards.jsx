@@ -35,24 +35,26 @@ const ProjectCards = () => {
   }
 
   return (
-    <div className="relative w-full h-full min-h-screen gap-4 flex-wrap flex justify-center items-center">
+    <div className="flex flex-col md:flex-row gap-6 md:gap-8 overflow-y-auto md:overflow-visible pb-4 md:pb-0 h-[calc(100vh-10rem)] md:h-auto">
       {projects.map((project, index) => (
         <div 
           key={index}
           onClick={() => toggleViewModal(project)} 
-          className="w-60 p-2 bg-white rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl"
+          className="w-full md:w-1/3 bg-white/20 backdrop-blur-lg rounded-lg p-2 md:p-6 flex flex-col gap-4 transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl font-mono"
         >
-          <img className="h-40 object-cover rounded-xl" src={project.image} alt={project.title}/>
-          <div className="p-2">
-            <h2 className="font-bold text-lg mb-2">{project.title}</h2>
-            <p className="text-sm text-gray-600">{project.description}</p>
+          <img className="h-50 md:h-50 mt-3 object-cover rounded-xl" src={project.image} alt={project.title}/>
+          <div className="p-2 flex flex-col flex-grow">
+            <h2 className="font-bold text-xl mb-3 text-yellow-500">{project.title}</h2>
+            <p className="text-base leading-relaxed text-gray-800 flex-grow">
+              {project.description}
+            </p>
           </div>
-          <div className="m-2">
+          <div className="mt-4 m-2">
             <a 
               role='button' 
               href={project.link} 
-              className="text-yellow-600 bg-transparent py-1 rounded-md hover:text-blue-700"
-              onClick={(e) => e.stopPropagation()}  // Prevent modal from opening when clicking link
+              className="text-yellow-500 hover:text-gray-500 font-medium text-base py-1 rounded-md transition-colors"
+              onClick={(e) => e.stopPropagation()}
             >
               View site
             </a>
@@ -66,7 +68,7 @@ const ProjectCards = () => {
           animate={{ opacity: 1 }}
           className="fixed left-0 right-0 flex items-center justify-center z-50"
           style={{
-            top: '100vh',  // Position at second page
+            top: '100vh',
             height: '100vh'
           }}
         >
@@ -74,35 +76,31 @@ const ProjectCards = () => {
             className="absolute inset-0 bg-black bg-opacity-50"
             onClick={() => toggleViewModal(null)}
           />
-          <motion.div 
-            className="bg-white rounded-lg p-8 relative max-w-2xl w-full mx-4"
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-          >
-            <button
-              onClick={() => toggleViewModal(null)}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-xl"
-            >
-              ×
-            </button>
+          <div className="bg-white p-6 rounded-lg shadow-xl relative max-w-md w-full m-4 font-mono">
+            <h2 className="text-2xl font-bold mb-4 text-yellow-500">{selectedProject.title}</h2>
             <img 
-              className="w-full h-64 object-cover rounded-lg mb-4" 
               src={selectedProject.image} 
-              alt={selectedProject.title}
+              alt={selectedProject.title} 
+              className="w-full h-48 object-cover rounded-lg mb-4"
             />
-            <h2 className="text-2xl font-bold mb-4">{selectedProject.title}</h2>
-            <p className="text-gray-600">{selectedProject.description}</p>
-            <div className="mt-4">
+            <p className="text-gray-700 mb-4">{selectedProject.description}</p>
+            <div className="flex justify-end">
               <a 
-                href={selectedProject.link} 
-                className="text-yellow-600 hover:text-blue-700"
+                href={selectedProject.link}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer" 
+                className="text-yellow-500 hover:text-gray-500 font-medium"
               >
                 View site
               </a>
             </div>
-          </motion.div>
+            <button
+              onClick={() => toggleViewModal(null)}
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 font-mono"
+            >
+              ×
+            </button>
+          </div>
         </motion.div>
       )}
     </div>

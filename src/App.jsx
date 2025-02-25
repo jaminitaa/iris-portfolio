@@ -61,6 +61,7 @@ function App() {
                   activePortal={activePortal}
                   setActive={setActive}
                   setActivePortal={setActivePortal}
+                  menuOpened={menuOpened}
                 />
               </Scroll>
             </ScrollControls>
