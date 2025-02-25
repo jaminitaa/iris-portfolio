@@ -100,7 +100,9 @@ const AboutSection = (props) => {
           <p className="text-lg text-gray-600 ml-6 mt-4 font-mono tracking-wide">
             Developer | Designer
             <br />
-            Explore the different seasons of me by clicking the cards!
+            Explore the different seasons of me 
+            <br />
+            by clicking the cards!
           </p>
         </>
       ) : (
